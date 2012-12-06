@@ -1,0 +1,25 @@
+#game {
+  box-sizing: border-box;
+  width: 300px; height: 300px;
+  board: 1px solid black;
+  font-family: 'Helvetica', sans-serif;
+}
+.square {
+  box-sizing: border-box;
+  width: 100px; height: 100px;
+  border: 1px solid black;
+  float: left;
+  text-align: center;
+  line-height: 100px;
+}
+.square-empty {
+  cursor: pointer;
+  cursor: hand;
+  text-indent: -9999px;
+}
+.square-x {
+  background-color: #ffaaa3;
+}
+.square-o {
+  background-color: #ccfdff;
+}

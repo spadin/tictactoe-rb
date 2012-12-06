@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "preferGlobal": "true",
+  "name": "tictactoe-game",
+  "version": "0.0.1",
+  "author": "Sandro Padin <s@ndropad.in>",
+  "description": "Tic Tac Toe game with AI that never loses.",
+  "devDependencies": {
+    "grunt-contrib-coffee":  "0.3.2",
+    "grunt-contrib-jst":  "0.3.2"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "0.8.x"
+  }
+}
