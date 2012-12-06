@@ -8,7 +8,7 @@ will always end in a draw.
 
 Usage:
 
-Visit http://spadin.github.com/tictactoe-game
+Visit http://spadin.github.com/tictactoe
 
 Development:
 
