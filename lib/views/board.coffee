@@ -20,10 +20,12 @@ class Board extends Backbone.View
       @message.append "please choose."
       @$el.on "click", ".square-empty", @handleHumanSelect
     else
-      @message.append "please wait."
-      setTimeout((=>
-        @handleAISelect @currentPlayer.move()
-      ), 0)
+      @message.append "please wait. <span class='progress'></span>"
+      $(@currentPlayer).on "progress", (evt, progress) ->
+        percentage = (progress*100).toFixed(2)
+        $(".progress", @message).text "#{percentage}%"
+        $(@currentPlayer).off "progress"
+      @currentPlayer.move (move) => @handleAISelect(move)
 
   nextTurn: ->
     unless @isGameover()
