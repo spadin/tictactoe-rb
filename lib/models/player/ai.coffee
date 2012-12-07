@@ -4,9 +4,24 @@ class AI extends TicTacToe.Player
     @playerType = 'AI'
     @setOpponentMarker()
 
-  move: ->
-    [move, score] = @bestMove()
-    move
+  move: (cb) ->
+    if Worker?
+      @worker = new Worker('lib/tictactoe-worker.js')
+      @worker.addEventListener "message", (e) => 
+        cb(e.data.move) if e.data.cmd is 'done'
+        console.log.apply(console, e.data.args) if e.data.cmd is 'console'
+        $(@).trigger 'progress', e.data.progress if e.data.cmd is 'progress'
+
+      @worker.postMessage 
+        cmd: "bestMove"
+        marker: @marker
+        boardArray: @board.board
+        history: @board.history
+    else
+      setTimeout((=>
+        [move, score] = @bestMove()
+        cb(move)
+      ), 0)
 
   setOpponentMarker: ->
     # Two markers are available [X, O]. Opponent marker is set to the marker 

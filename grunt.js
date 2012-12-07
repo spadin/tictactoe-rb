@@ -22,6 +22,9 @@ module.exports = function(grunt) {
             'lib/models/*.coffee', 
             'lib/models/**/*.coffee', 
             'lib/views/*.coffee'
+          ],
+          'workers/tictactoe-ai-worker.js': [
+            'workers/tictactoe-ai-worker.coffee'
           ]
         }
       }
@@ -62,6 +65,13 @@ module.exports = function(grunt) {
           'vendor/backbone-min.js'
         ],
         dest: 'lib/vendor.js'
+      },
+      worker: {
+        src: [
+          'vendor/underscore-min.js',
+          'workers/tictactoe-ai-worker.js'
+        ],
+        dest: 'lib/tictactoe-worker.js'
       }
     },
     min: {
@@ -71,8 +81,8 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['<config:lint.files>', 'lib/**/*.coffee', 'lib/**/*.jst'],
-      tasks: 'coffee jst lint qunit concat:vendor'
+      files: ['<config:lint.files>', 'lib/**/*.coffee', 'workers/**/*.coffee', 'lib/**/*.jst'],
+      tasks: 'coffee jst lint qunit concat:vendor concat:worker'
     },
     jshint: {
       options: {
