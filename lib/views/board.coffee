@@ -98,6 +98,8 @@ class Board extends Backbone.View
     throw 'invalid-move' if _(@history).include(position)
     @history.push position
     @board[position] = marker
+    @updatePlayerMoves()
+    @checkGameover()
     @render() if render
 
   undoLastMove: ->
@@ -105,39 +107,41 @@ class Board extends Backbone.View
     position = @history.pop()
     @board[position] = "-"
 
-  isGameover: ->
+  checkGameover: ->
     @winner = null
     if @winningCombinationExists()
-      true
+      @gameover = true
     else if @history.length is 9
-      true
+      @gameover = true
     else
-      false
+      @gameover = false
+
+  isGameover: -> @gameover
 
   winningCombinationExists: ->
     winningCombination = false
-    [p1moves, p2moves] = @getPlayerMoves()
 
     _(@winningCombinations).each (combination) =>
-      if _(combination).chain().intersection(p1moves).isEqual(combination).value()
+      if @p1moves[combination[0]] and @p1moves[combination[1]] and @p1moves[combination[2]]
         @winner = @p1
         winningCombination = true
 
-      if _(combination).chain().intersection(p2moves).isEqual(combination).value()
+      if @p2moves[combination[0]] and @p2moves[combination[1]] and @p2moves[combination[2]]
         @winner = @p2
         winningCombination = true
 
     winningCombination
 
-  getPlayerMoves: ->
-    p1moves = []
-    p2moves = []
+  updatePlayerMoves: ->
+    @p1moves = new Array(9)
+    @p2moves = new Array(9)
     
     _(@board).each (mark, position) =>
-      p1moves.push(position) if mark is 'X'
-      p2moves.push(position) if mark is 'O'
+      @p1moves[position] = false
+      @p2moves[position] = false
 
-    [p1moves, p2moves]
+      @p1moves[position] = true if mark is 'X'
+      @p2moves[position] = true if mark is 'O'
 
   freePositions: ->
     freePositions = []
