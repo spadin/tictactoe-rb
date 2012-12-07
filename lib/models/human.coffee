@@ -1,6 +1,5 @@
-class Human extends TicTacToe.Player
+class Human
   constructor: ({@marker, @board, @playerNumber}) ->
-    super()
     @playerType = 'Human'
 
 namespace 'TicTacToe', (exports) ->

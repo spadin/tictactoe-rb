@@ -19,7 +19,6 @@ module.exports = function(grunt) {
         files: {
           'lib/<%= pkg.name %>.js': [
             'lib/helpers/namespace.coffee', 
-            'lib/models/*.coffee', 
             'lib/models/**/*.coffee', 
             'lib/views/*.coffee'
           ],

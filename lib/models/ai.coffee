@@ -1,12 +1,13 @@
-class AI extends TicTacToe.Player
+class AI
   constructor: ({@marker, @board, @playerNumber}) ->
-    super()
     @playerType = 'AI'
     @setOpponentMarker()
+
 
   move: (cb) ->
     if Worker?
       @worker = new Worker('lib/tictactoe-worker.js')
+
       @worker.addEventListener "message", (e) => 
         cb(e.data.move) if e.data.cmd is 'done'
         console.log.apply(console, e.data.args) if e.data.cmd is 'console'
@@ -17,17 +18,20 @@ class AI extends TicTacToe.Player
         marker: @marker
         boardArray: @board.board
         history: @board.history
+
     else
       setTimeout((=>
         [move, score] = @bestMove()
         cb(move)
       ), 0)
 
+
   setOpponentMarker: ->
     # Two markers are available [X, O]. Opponent marker is set to the marker 
     # that is not our marker.
     @opponentMarker = 'X'
     @opponentMarker = 'O' if @marker is 'X'
+
 
   bestMove: ->
     [highestScore, bestMove] = [null, null]
@@ -47,6 +51,7 @@ class AI extends TicTacToe.Player
 
     [bestMove, highestScore]
 
+
   worstMove: ->
     [lowestScore, worstMove] = [null, null]
 
@@ -64,6 +69,7 @@ class AI extends TicTacToe.Player
         worstMove = position
 
     [worstMove, lowestScore]
+
 
   getScore: ->
     score = 0
