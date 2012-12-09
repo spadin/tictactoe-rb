@@ -58,7 +58,7 @@ class AI
   end
 
   def get_score
-    if @board.winner.nil
+    if @board.winner.nil?
       0
     elsif @board.winner == @marker
       1
