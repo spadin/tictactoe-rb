@@ -44,7 +44,7 @@ class AI
       if @board.gameover? 
         score = get_score
       else
-        move_position, score = min_move
+        move_position, score = max_move
       end
 
       @board.undo_last_mark!
