@@ -6,8 +6,9 @@ class Board
   def initialize
     @cells = ['-']*9
     @move_history = []
-    @current_marker = :x
+    @current_marker = "x"
     @free_positions = [*0..8]
+    @gameover = false
   end
 
   def start(x,o)
@@ -48,7 +49,7 @@ class Board
   end
 
   def next_marker
-    (@current_marker == :x)? :o : :x
+    (@current_marker == "x")? "o" : "x"
   end
 
   def mark(position, marker)
@@ -59,7 +60,7 @@ class Board
     @move_history << position
     @current_marker = next_marker
     @gameover = (winning_combination? || @move_history.size == 9)
-    @free_positions = @free_positions.reject {|fp| fp == position}
+    @free_positions.reject! {|fp| fp == position}
   end
 
   def undo_last_mark!
@@ -76,14 +77,15 @@ class Board
   end
 
   def winning_combination?
+    @winner = nil
     winning_combinations.each do |combo|
-      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == [:x,:x,:x]
-        @winner = :x
+      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == ["x","x","x"]
+        @winner = "x"
         return true
       end
 
-      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == [:y,:y,:y]
-        @winner = :y
+      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == ["o","o","o"]
+        @winner = "o"
         return true
       end
     end

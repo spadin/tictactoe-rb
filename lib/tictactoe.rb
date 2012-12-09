@@ -23,10 +23,10 @@ class TicTacToe
     set_game_type game_type
 
     klass = [:human_vs_human, :human_vs_ai].include?(game_type)? Human : AI
-    @x = klass.new(:x)
+    @x = klass.new("x")
 
     klass = [:human_vs_human, :ai_vs_human].include?(game_type)? Human : AI
-    @o = klass.new(:o)
+    @o = klass.new("o")
 
     set_boards_for_ai
   end
