@@ -32,8 +32,8 @@ class TicTacToe
   end
 
   def set_boards_for_ai
-    @x.board = @board if @x.class == AI
-    @o.board = @board if @o.class == AI
+    @x.board = board if @x.class == AI
+    @o.board = board if @o.class == AI
   end
 
   def set_game_type(game_type)
