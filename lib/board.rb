@@ -1,11 +1,13 @@
 class Board
   attr_reader :move_history
+  attr_reader :free_positions
   attr_reader :winner
 
   def initialize
     @cells = ['-']*9
     @move_history = []
     @current_marker = :x
+    @free_positions = [*0..8]
   end
 
   def start(x,o)
@@ -26,7 +28,7 @@ class Board
   end
 
   def draw_board
-    system("clear")
+    system "clear"
     puts %{
       #{draw_cell(0)} | #{draw_cell(1)} | #{draw_cell(2)}
       #{draw_cell(3)} | #{draw_cell(4)} | #{draw_cell(5)}
@@ -51,36 +53,36 @@ class Board
 
   def mark(position, marker)
     raise ArgumentError unless @current_marker == marker
-    raise "Duplicate - tried to insert (#{position}, #{marker}) to #{@cells}" if @move_history.include?(position)
+    raise "InvalidPosition - tried to insert (#{position}, #{marker}) to #{@cells}" if @move_history.include?(position)
+
     @cells[position] = marker
     @move_history << position
     @current_marker = next_marker
     @gameover = (winning_combination? || @move_history.size == 9)
+    @free_positions = @free_positions.reject {|fp| fp == position}
   end
 
   def undo_last_mark!
     @gameover = false
-    @current_mark = next_marker
+    @current_marker = next_marker
     position = @move_history.pop
     @cells[position] = '-'
+    @free_positions << position
+    @free_positions.sort!
   end
 
   def gameover?
     @gameover
   end
 
-  def free_positions
-    @cells.select {|cell| cell == '-'}.fill {|i| i}
-  end
-
   def winning_combination?
     winning_combinations.each do |combo|
-      if @cells[combo[0]] == :x && @cells[combo[1]] == :x && @cells[combo[2]] == :x
+      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == [:x,:x,:x]
         @winner = :x
         return true
       end
 
-      if @cells[combo[0]] == :y && @cells[combo[1]] == :y && @cells[combo[2]] == :y
+      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == [:y,:y,:y]
         @winner = :y
         return true
       end
