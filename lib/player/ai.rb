@@ -17,8 +17,6 @@ class AI
 
   def max_move
     best_move, highest_score = nil, nil
-    p 'max_move'
-    p @board.free_positions
 
     @board.free_positions.each do |position|
       @board.mark(position, @marker)
@@ -40,8 +38,6 @@ class AI
 
   def min_move
     worst_move, lowest_score = nil, nil
-    p 'min_move'
-    p @board.free_positions
 
     @board.free_positions.each do |position|
       @board.mark(position, opponent_marker)
