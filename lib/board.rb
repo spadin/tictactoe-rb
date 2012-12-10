@@ -79,14 +79,11 @@ class Board
   def winning_combination?
     @winner = nil
     winning_combinations.each do |combo|
-      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == ["x","x","x"]
-        @winner = "x"
-        return true
-      end
-
-      if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == ["o","o","o"]
-        @winner = "o"
-        return true
+      ["x", "o"].each do |mark|
+        if [@cells[combo[0]], @cells[combo[1]], @cells[combo[2]]] == [mark,mark,mark]
+          @winner = mark
+          return true
+        end
       end
     end
     return false
