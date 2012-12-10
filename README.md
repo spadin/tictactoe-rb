@@ -7,8 +7,6 @@
   <img src="https://codeclimate.com/badge.png" />
 </a>
 
-![Alt text](/path/to/img.jpg)
-
 A Ruby-based command line Tic Tac Toe game.
 
 To play:
