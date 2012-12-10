@@ -10,3 +10,7 @@ To run tests:
 
     $ bundle install
     $ bundle exec rspec spec
+
+I also created a [web-based CoffeeScript version][1] of this Tic Tac Toe game.
+
+[1]: https://github.com/spadin/tictactoe/tree/v0.1
