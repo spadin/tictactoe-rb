@@ -1,8 +1,9 @@
 # Tic Tac Toe Game
 
 <a href="http://travis-ci.org/spadin/tictactoe">
-  <img src="https://secure.travis-ci.org/spadin/tictactoe.png?rvm=1.9.3" />
+  <img src="https://secure.travis-ci.org/spadin/tictactoe.png?branch=master" />
 </a> 
+
 <a href="https://codeclimate.com/github/spadin/tictactoe">
   <img src="https://codeclimate.com/badge.png" />
 </a>
