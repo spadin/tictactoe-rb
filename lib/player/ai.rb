@@ -7,7 +7,7 @@ class AI
   end
 
   def move
-    move, score = max_move
+    move, score = calculate_move
     move
   end
 
@@ -15,44 +15,25 @@ class AI
     @opponent_marker ||= (@marker == "x")? "o" : "x"
   end
 
-  def max_move
-    best_move, highest_score = nil, nil
-
+  def calculate_move(current_comparison = :>)
+    next_comparison = (current_comparison == :>)? :< : :>
+    calculated_move, calculated_score = nil, nil
     @board.free_positions.each do |position|
-      @board.mark(position, @marker)
+      @board.mark(position, @marker) if current_comparison == :>
+      @board.mark(position, opponent_marker) if current_comparison == :<
       if @board.gameover? 
         score = get_score
       else
-        move_position, score = min_move
+        move_position, score = calculate_move(next_comparison)
       end
       @board.undo_last_mark!
 
-      if highest_score == nil || score > highest_score
-        best_move, highest_score = position, score
+      if calculated_score == nil || score.send(current_comparison, calculated_score)
+        calculated_move, calculated_score = position, score
       end
     end
 
-    [best_move, highest_score]
-  end
-
-  def min_move
-    worst_move, lowest_score = nil, nil
-
-    @board.free_positions.each do |position|
-      @board.mark(position, opponent_marker)
-      if @board.gameover? 
-        score = get_score
-      else
-        move_position, score = max_move
-      end
-      @board.undo_last_mark!
-
-      if lowest_score == nil || score < lowest_score
-        worst_move, lowest_score = position, score
-      end
-    end
-    
-    [worst_move, lowest_score]
+    [calculated_move, calculated_score]    
   end
 
   def get_score
