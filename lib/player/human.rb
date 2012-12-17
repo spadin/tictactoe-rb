@@ -1,8 +1,8 @@
 class Human
-  attr_reader :marker
+  attr_reader :player_marker
 
-  def initialize(marker)
-    @marker = marker
+  def initialize(player_marker)
+    @player_marker = player_marker
   end
 
   def move
@@ -11,7 +11,7 @@ class Human
 
   def prompt_for_move(move='')
     until move.numeric? && move.to_i >= 0 && move.to_i < 10
-      puts "#{marker}'s turn, what's your next move?"
+      puts "#{player_marker}'s turn, what's your next move?"
       move = gets.chomp
     end
     move.to_i
