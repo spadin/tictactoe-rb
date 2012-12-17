@@ -7,7 +7,7 @@ class AI
   end
 
   def move
-    move, score = calculate_move
+    move, _ = calculate_move
     move
   end
 
@@ -24,7 +24,7 @@ class AI
       if board.gameover? 
         score = calculate_score
       else
-        move_position, score = calculate_move(next_comparison)
+        _, score = calculate_move(next_comparison)
       end
       board.undo_last_mark!
 
