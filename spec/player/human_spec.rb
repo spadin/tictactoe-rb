@@ -15,9 +15,9 @@ describe Human do
       move.should == 1
     end
 
-    it "should only accept a number between 0 and 9" do
+    it "should only accept an integer between 0 and 9" do
       player.stub(:puts)
-      player.stub(:gets).and_return('','15','99','0')
+      player.stub(:gets).and_return('','2.0','15','99','0')
       move = player.move
       move.should == 0
     end

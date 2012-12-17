@@ -20,6 +20,6 @@ end
 
 class String
   def numeric?
-    Float(self) != nil rescue false
+    Integer(self) != nil rescue false
   end
 end
