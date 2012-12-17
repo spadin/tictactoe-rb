@@ -7,7 +7,7 @@ class AI
   end
 
   def move
-    move, score = max_move(true)
+    move, score = max_move
     move
   end
 
@@ -15,7 +15,7 @@ class AI
     @opponent_marker ||= (@marker == "x")? "o" : "x"
   end
 
-  def max_move(init=false)
+  def max_move
     best_move, highest_score = nil, nil
 
     @board.free_positions.each do |position|
