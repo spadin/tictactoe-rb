@@ -39,9 +39,9 @@ class AI
   def get_score
     if @board.winner.nil?
       0
-    elsif @board.winner.eql? @marker
+    elsif @board.winner == @marker
       1
-    elsif @board.winner.eql? opponent_marker
+    else
       -1
     end
   end
