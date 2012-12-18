@@ -1,5 +1,5 @@
 class BoardPrinter
-  def print(cells)
+  def print_board(cells)
     @cells = cells
     system "clear"
     puts %{
