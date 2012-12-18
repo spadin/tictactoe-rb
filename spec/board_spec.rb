@@ -4,8 +4,9 @@ require 'player/human'
 
 describe Board do
   before do
-    BoardPrinter.any_instance.stub(:print_board)
     @board = Board.new
+    @board.printer = BoardPrinter.new
+    @board.printer.stub(:print)
     @board.stub(:puts)
   end
 

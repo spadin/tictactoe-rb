@@ -1,6 +1,7 @@
 require_relative './board_printer'
 
 class Board
+  attr_accessor :printer
   attr_reader :move_history
   attr_reader :free_positions
   attr_reader :winner
@@ -11,27 +12,24 @@ class Board
     @current_marker = "x"
     @free_positions = [*0..8]
     @gameover = false
+    @printer = BoardPrinter.new
   end
 
   def start(x,o)
     @x, @o = x, o
     until gameover?
       begin
-        print_board
+        @printer.print_board(@cells)
         mark current_player.move, @current_marker
       rescue RuntimeError
         next
       end
     end
     if winner then
-      puts "The #{winner}'s win!"
+      @printer.print "The #{winner}'s win!"
     else
-      puts "Nobody wins."
+      @printer.print "Nobody wins."
     end
-  end
-
-  def print_board(printer = BoardPrinter.new)
-    printer.print_board @cells
   end
 
   def current_player

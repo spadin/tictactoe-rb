@@ -13,7 +13,7 @@ describe BoardPrinter do
       x | o | o
       6 | 7 | 8
     }
-    @printer.should_receive(:puts).with(expected_board)
+    @printer.should_receive(:print).with(expected_board)
     @printer.print_board(cells)
   end
 end
