@@ -1,3 +1,5 @@
+require_relative './board_printer'
+
 class Board
   attr_reader :move_history
   attr_reader :free_positions
@@ -15,7 +17,7 @@ class Board
     @x, @o = x, o
     until gameover?
       begin
-        draw_board
+        print_board
         mark current_player.move, @current_marker
       rescue RuntimeError
         next
@@ -28,20 +30,8 @@ class Board
     end
   end
 
-  def draw_board
-    system "clear"
-    puts %{
-      #{draw_cell(0)} | #{draw_cell(1)} | #{draw_cell(2)}
-      #{draw_cell(3)} | #{draw_cell(4)} | #{draw_cell(5)}
-      #{draw_cell(6)} | #{draw_cell(7)} | #{draw_cell(8)}
-    }
-  end
-  def draw_cell(position)
-    if @cells[position] == '-'
-      position
-    else
-      @cells[position]
-    end
+  def print_board(printer = BoardPrinter.new)
+    printer.print_board @cells
   end
 
   def current_player
