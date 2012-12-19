@@ -15,25 +15,20 @@ class Board
     @printer = BoardPrinter.new
   end
 
-  def start(x,o)
+  def set_players(x, o)
     @x, @o = x, o
-    until gameover?
-      begin
-        @printer.print_board(@cells)
-        mark current_player.move, @current_marker
-      rescue RuntimeError
-        next
-      end
-    end
-    if winner then
-      @printer.print "The #{winner}'s win!"
-    else
-      @printer.print "Nobody wins."
-    end
+  end
+
+  def print_board
+    @printer.print_board(@cells)
   end
 
   def current_player
     instance_variable_get("@#{@current_marker.to_s}")
+  end
+
+  def current_marker
+    @current_marker
   end
 
   def next_marker

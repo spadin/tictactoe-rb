@@ -77,32 +77,4 @@ describe Board do
     @board.mark 5, "o"
     lambda { @board.mark 5, "x" }.should raise_error
   end
-
-  it "should be able to start a game with two players and have a winner" do
-    x = Human.new("x")
-    o = Human.new("o")
-
-    x.stub(:puts)
-    o.stub(:puts)
-
-    x.stub(:gets).and_return('0','1','2','3')
-    o.stub(:gets).and_return('4','5','7')
-
-    @board.start(x,o)
-    @board.winner.should == "x"
-  end
-
-  it "should ask user to try again if spot is taken" do
-    x = Human.new("x")
-    o = Human.new(:y)
-
-    x.stub(:puts)
-    o.stub(:puts)
-
-    x.stub(:gets).and_return('0','4','1','2','3')
-    o.stub(:gets).and_return('4','5','7','8')
-
-    @board.start(x,o)
-    @board.winner.should == "x"
-  end
 end

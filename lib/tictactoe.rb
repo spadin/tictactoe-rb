@@ -11,7 +11,20 @@ class TicTacToe
   end
 
   def start
-    board.start(@x, @o)
+    until board.gameover?
+      begin
+        board.print_board
+        board.mark board.current_player.move, board.current_marker
+      rescue RuntimeError
+        next
+      end
+    end
+
+    if board.winner then
+      board.printer.print "The #{board.winner}'s win!"
+    else
+      board.printer.print "Nobody wins."
+    end
   end
 
   def board
@@ -28,6 +41,7 @@ class TicTacToe
     klass = [:human_vs_human, :ai_vs_human].include?(game_type)? Human : AI
     @o = klass.new("o")
 
+    board.set_players @x, @o
     set_boards_for_ai
   end
 
