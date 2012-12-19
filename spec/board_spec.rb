@@ -1,12 +1,10 @@
 require 'board'
-require 'board_printer'
+require 'command_line_printer'
 require 'player/human'
 
 describe Board do
   before do
     @board = Board.new
-    @board.printer = BoardPrinter.new
-    @board.printer.stub(:print)
     @board.stub(:puts)
   end
 

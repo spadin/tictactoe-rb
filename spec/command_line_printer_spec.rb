@@ -1,8 +1,8 @@
-require 'board_printer'
+require 'command_line_printer'
 
-describe BoardPrinter do
+describe CommandLinePrinter do
   before do
-    @printer = BoardPrinter.new
+    @printer = CommandLinePrinter.new
     @printer.stub(:puts)
   end
 

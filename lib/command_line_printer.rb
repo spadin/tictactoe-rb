@@ -1,4 +1,4 @@
-class BoardPrinter
+class CommandLinePrinter
   def print_board(cells)
     @cells = cells
     system "clear"

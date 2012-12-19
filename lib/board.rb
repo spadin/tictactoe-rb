@@ -1,7 +1,4 @@
-require_relative './board_printer'
-
 class Board
-  attr_accessor :printer
   attr_reader :move_history
   attr_reader :free_positions
   attr_reader :winner
@@ -12,15 +9,14 @@ class Board
     @current_marker = "x"
     @free_positions = [*0..8]
     @gameover = false
-    @printer = BoardPrinter.new
   end
 
   def set_players(x, o)
     @x, @o = x, o
   end
 
-  def print_board
-    @printer.print_board(@cells)
+  def print_board(printer)
+    printer.print_board(@cells)
   end
 
   def current_player

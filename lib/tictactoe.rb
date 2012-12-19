@@ -1,19 +1,21 @@
 require_relative './board'
 require_relative './player/human'
 require_relative './player/ai'
+require_relative './command_line_printer'
 
 class TicTacToe
   attr_reader :game_type
   attr_reader :x, :o
 
   def initialize(type)
+    @printer = CommandLinePrinter.new
     set_players type
   end
 
   def start
     until board.gameover?
       begin
-        board.print_board
+        board.print_board @printer
         board.mark board.current_player.move, board.current_marker
       rescue RuntimeError
         next
@@ -21,9 +23,9 @@ class TicTacToe
     end
 
     if board.winner then
-      board.printer.print "The #{board.winner}'s win!"
+      @printer.print "The #{board.winner}'s win!"
     else
-      board.printer.print "Nobody wins."
+      @printer.print "Nobody wins."
     end
   end
 
