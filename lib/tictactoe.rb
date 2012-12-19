@@ -1,14 +1,14 @@
 require_relative './board'
 require_relative './player/human'
 require_relative './player/ai'
-require_relative './command_line_printer'
+require_relative './printer/cli'
 
 class TicTacToe
   attr_reader :game_type
   attr_reader :x, :o
 
   def initialize(type)
-    @printer = CommandLinePrinter.new
+    @printer = TicTacToePrinter::CLI.new
     set_players type
   end
 

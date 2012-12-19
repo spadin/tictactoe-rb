@@ -1,5 +1,4 @@
 require 'board'
-require 'command_line_printer'
 require 'player/human'
 
 describe Board do
