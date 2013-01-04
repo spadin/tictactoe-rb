@@ -1,0 +1,13 @@
+TicTacToeConsoleRunner
+  Similar to what TicTacToe is now
+
+TicTacToeGame
+  has an instance of board
+    TicTacToeGame.new.board # @board = Board.new
+  keeps track of current player
+  current_player.move(board)
+
+Board
+  dumber than it is now
+  keeps track of who has what spot/space
+  doesn't know the current player
