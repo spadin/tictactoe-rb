@@ -7,5 +7,6 @@ end
 
 group :test do
   gem 'rspec'
+  gem 'surrogate'
   gem 'rake'
 end

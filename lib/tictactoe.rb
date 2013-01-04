@@ -7,8 +7,8 @@ class TicTacToe
   attr_reader :game_type
   attr_reader :x, :o
 
-  def initialize(type)
-    @printer = TicTacToePrinter::CLI.new
+  def initialize(type, printer=TicTacToePrinter::CLI.new)
+    @printer = printer
     set_players type
   end
 
@@ -34,6 +34,7 @@ class TicTacToe
   end
 
   private
+
   def set_players(game_type)
     set_game_type game_type
 

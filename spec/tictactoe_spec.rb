@@ -1,12 +1,13 @@
 require "tictactoe"
+require "mocks/printer"
 
 describe TicTacToe do
   before do
     STDOUT.stub(:print)
   end
 
-  let(:game) {TicTacToe.new(:human_vs_human)}
-  
+  let(:game) {TicTacToe.new(:human_vs_human, MockPrinter.new)}
+
   describe "#initialize" do
     it "should expect a game type when instantiating" do
       lambda { TicTacToe.new }.should raise_error

@@ -1,10 +1,16 @@
 require 'printer/cli'
+require "mocks/printer"
 
 module TicTacToePrinter
   describe CLI do
     before do
       @printer = CLI.new
       @printer.stub(:puts)
+      @printer.stub(:system)
+    end
+
+    it "implements the methods on the MockPrinter" do
+      MockPrinter.should be_substitutable_for(TicTacToePrinter::CLI)  
     end
 
     it "should print the board correctly" do
